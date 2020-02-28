@@ -12,9 +12,11 @@ formularioContactos.addEventListener("submit", (e)=>{
     if(nombre === '' && empresa === '' && telefono && ''){
         //enviaremos dos parametros text  clase
         mostrarNotificacion('Todos los campos son Obligatorios','error');
+     
     }else {
         //pasa la validacion, crea el llamado de Ajax
         const inforContacto = new FormData();
+        //creamos un constructor en Ajax
         inforContacto.append('nombre',nombre);
         inforContacto.append('empresa', empresa);
         inforContacto.append('telefono', telefono);
@@ -95,6 +97,7 @@ function mostrarNotificacion(mensaje, clase){
     //oculta y Mostrar la notificacion
     setTimeout(() => {
         notificacion.classList.add('visible');//agregamos 
+        //setTimeout es una funcion que se ejecuta segun el tiempo
         setTimeout(() => {
             notificacion.classList.remove('visible');//removemos la clse visible que tiene opacity 1
             setTimeout(() => {
