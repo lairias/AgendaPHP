@@ -48,37 +48,10 @@ function insetarBD(datos) {
             //status 200 = Correcto, 404 = No enconcontrado, 501 = Error en el servidor
             const respuesta = JSON.parse(xhr.responseText);//JSON.parse() convierte el string a un JSON
 
-            //Inserta un nuevo contacto sin necesidad de cargar la pagina
-            const nuevoContato = document.createElement('tr');
-            nuevoContato.innerHTML = `
-        <td>${respuesta.datos.nombre}</td>
-        <td>${respuesta.datos.empresa}</td>
-        <td>${respuesta.datos.telefono}</td>
+            //Inserta un nuevo contacto sin necesidad de cargar la pagina crearemos una funcion
+            ContactoTable(datos)
 
-        `;
-            //contenedor de los botones
-            const accionesBtn = document.createElement('td')
-            const IconoEditar = document.createElement('i');
-            IconoEditar.classList.add('fas', ' fa-edit');
-            //creamos el enlace de editat
-            const BtnEditar = document.createElement('a');
-            BtnEditar.appendChild(IconoEditar);
-            BtnEditar.href = `editar.php?id=${respuesta.datos.id_insertado}`;
-            BtnEditar.classList.add('btn', 'btn-editar')
-
-            accionesBtn.appendChild(BtnEditar);
-
-            /*--Creamos el icono de Eleminar--*/
-            const IconoBorrar = document.createElement('i');
-            IconoBorrar.classList.add('fas', 'fa-trash-alt');
-            //Creamos el botton de eliminar
-            const btnEliminar = document.createElement('button');
-            btnEliminar.appendChild(IconoBorrar);
-            btnEliminar.setAttribute('data-id', respuesta.datos.id_insertado);
-            btnEliminar.classList.add('btn', 'btn-borrar')
-            accionesBtn.appendChild(btnEliminar)
-
-            nuevoContato.appendChild(accionesBtn);
+        
         }
     }
     //enviar los datos
@@ -86,6 +59,41 @@ function insetarBD(datos) {
 
 
 }
+
+//funcion de Agregar los contactos a un Table con Ajax
+function ContactoTable(datos){
+    const nuevoContato = document.createElement('tr');
+    nuevoContato.innerHTML = `
+        <td>${respuesta.datos.nombre}</td>
+        <td>${respuesta.datos.empresa}</td>
+        <td>${respuesta.datos.telefono}</td>
+
+        `;
+    //contenedor de los botones
+    const accionesBtn = document.createElement('td')
+    const IconoEditar = document.createElement('i');
+    IconoEditar.classList.add('fas', ' fa-edit');
+    //creamos el enlace de editat
+    const BtnEditar = document.createElement('a');
+    BtnEditar.appendChild(IconoEditar);
+    BtnEditar.href = `editar.php?id=${respuesta.datos.id_insertado}`;
+    BtnEditar.classList.add('btn', 'btn-editar')
+
+    accionesBtn.appendChild(BtnEditar);
+
+    /*--Creamos el icono de Eleminar--*/
+    const IconoBorrar = document.createElement('i');
+    IconoBorrar.classList.add('fas', 'fa-trash-alt');
+    //Creamos el botton de eliminar
+    const btnEliminar = document.createElement('button');
+    btnEliminar.appendChild(IconoBorrar);
+    btnEliminar.setAttribute('data-id', respuesta.datos.id_insertado);
+    btnEliminar.classList.add('btn', 'btn-borrar')
+    accionesBtn.appendChild(btnEliminar)
+
+    nuevoContato.appendChild(accionesBtn);
+}
+
 
 //Notificacion en pantalla cuando se agrege un contacto
 function mostrarNotificacion(mensaje, clase) {
